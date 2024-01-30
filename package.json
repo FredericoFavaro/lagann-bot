@@ -1,0 +1,22 @@
+{
+  "name": "lagann_bot",
+  "version": "1.0.0",
+  "description": "A Discord Bot created over discord.js module",
+  "main": "src/core.js",
+  "scripts": {
+    "start": "node src/core.js",
+    "dev": "nodemon src/core.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Frederico Fávaro",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.3"
+  }
+}
