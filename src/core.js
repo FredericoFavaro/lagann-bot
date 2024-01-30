@@ -16,6 +16,20 @@ const client = new Client({
 client.on('ready', (c) => {
 	console.log(`Rejeite o bom senso para tornar o impossível possível!\n${c.user.username} chegou com tudo!!!`);
 });
+
+// esse event listener que escuta as interacoes, ele que é acionado quando um slash command é executado
+client.on('interactionCreate', (interaction) => {
+    // testa se a interacao nao (!) foi slash command. Se for um slash command (True), ele nega o resultado, tornando um False. Assim o resto do comando é executado.
+    if (!interaction.isChatInputCommand()) return;
+
+    if (interaction.commandName === 'hey') {
+        interaction.reply('hey!!');
+    }
+    if (interaction.commandName === 'ping') {
+        interaction.reply('pong!');
+    }
+});
+
 // event listener ativado quando uma nova mensagem é criada
 client.on('messageCreate', (message) => {
     // retorna uma mensagem com o nome do usuário e a mensagem que ele mandou
