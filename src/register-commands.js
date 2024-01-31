@@ -4,7 +4,7 @@ Este arquivo serve exclusivamente para registrar slash commands (/comando). Ele 
 Será necessario obter o ID do servidor (GUILD_ID) e do bot (CLIENT_ID) no discord (modo desenvolvedor), e adiciona-los no .env
 */
 require('dotenv').config();
-const { REST, Routes } = require('discord.js');
+const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 
 // Definindo os comandos. Cada objeto dentro de commands representa um comando
 const commands = [
@@ -15,6 +15,37 @@ const commands = [
     {
         name: 'ping',
         description: 'pong!',
+    },
+    {
+        // Definindo um slash command com opcoes
+        name: 'soma',
+        description: 'Soma dois números.',
+        options: [
+            {
+                name: 'primeiro-numero',
+                description: 'Primeiro número.',
+                type: ApplicationCommandOptionType.Number,
+                // Usado para definir a opcao como obrigatoria. Default = false
+                required: true,
+            },
+            {
+                name: 'segundo-numero',
+                description: 'Segundo número.',
+                type: ApplicationCommandOptionType.Number,
+                // permite que o usuário escolha uma das opcoes disponiveis ao inves de precisar digitar o valor
+                choices: [
+                    {
+                        name: 'dois',
+                        value: 2,
+                    },
+                    {
+                        name: 'três',
+                        value: 3,
+                    },
+                ],
+                required: true,
+            },
+        ]
     },
 ];
 

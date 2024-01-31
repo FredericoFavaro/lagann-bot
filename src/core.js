@@ -24,16 +24,27 @@ client.on('interactionCreate', (interaction) => {
 
     if (interaction.commandName === 'hey') {
         interaction.reply('hey!!');
-    }
+    };
     if (interaction.commandName === 'ping') {
         interaction.reply('pong!');
-    }
+    };
+
+    if (interaction.commandName === 'soma') {
+        const num1 = interaction.options.get('primeiro-numero').value;
+        const num2 = interaction.options.get('segundo-numero').value;
+        
+        interaction.reply(`O resultado da soma é ${num1 + num2}`);
+    };
 });
 
 // event listener ativado quando uma nova mensagem é criada
 client.on('messageCreate', (message) => {
+    if (message.author.bot) {
+        console.log(`Lagaan respondeu "${message.content}"`);
+    } else {
     // retorna uma mensagem com o nome do usuário e a mensagem que ele mandou
-    console.log(`O usuário ${message.author.globalName} disse "${message.content}"`);
+    console.log(`O usuário ${message.author.globalName} disse: "${message.content}"`);
+    };
 });
 
 // bot responde a uma mensagem específica
