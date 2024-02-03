@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 require('dotenv').config();
-const { Client, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder } = require('discord.js');
 // Crieando um novo bot
 const client = new Client({
     // Dando permicoes ao bot, acesso ao servidor, membros, escutar msgs e ler o conteudo das mensagens respectivamente.
@@ -17,7 +17,7 @@ client.on('ready', (c) => {
 	console.log(`Rejeite o bom senso para tornar o impossível possível!\n${c.user.username} chegou com tudo!!!`);
 });
 
-// esse event listener que escuta as interacoes, ele que é acionado quando um slash command é executado
+// esse event listener/command listener que escuta as interacoes, ele que é acionado quando um slash command é executado
 client.on('interactionCreate', (interaction) => {
     // testa se a interacao nao (!) foi slash command. Se for um slash command (True), ele nega o resultado, tornando um False. Assim o resto do comando é executado.
     if (!interaction.isChatInputCommand()) return;
@@ -34,6 +34,28 @@ client.on('interactionCreate', (interaction) => {
         const num2 = interaction.options.get('segundo-numero').value;
         
         interaction.reply(`O resultado da soma é ${num1 + num2}`);
+    };
+
+    if (interaction.commandName === 'embed') {
+        const embed = new EmbedBuilder()
+            .setTitle('Teste Embed')
+            .setDescription('Esse é um teste de uso do embed!!!')
+            .setColor('Random')
+            .addFields({
+                name: 'botao1',
+                value: '[  ]',
+                inline: true
+            },{
+                name: 'botao2',
+                value: '[  ]',
+                inline: true
+            },{
+                name: 'botao3',
+                value: '[  ]',
+                inline: true
+            });
+
+            interaction.reply({embeds: [embed]});
     };
 });
 
@@ -55,6 +77,27 @@ client.on('messageCreate', (message) => {
     }
     if (message.content === 'aew') {
         message.reply('E AEW!!!');
+    }
+    if (message.content === 'embed') {
+        const embed = new EmbedBuilder()
+            .setTitle('Teste Embed')
+            .setDescription('Esse é um teste de uso do embed!!!')
+            .setColor('Random')
+            .addFields({
+                name: 'botao1',
+                value: '[  ]',
+                inline: true
+            },{
+                name: 'botao2',
+                value: '[  ]',
+                inline: true
+            },{
+                name: 'botao3',
+                value: '[  ]',
+                inline: true
+            });
+
+            message.channel.send({embeds: [embed]});
     }
 });
 // obtem o Token do bot no arquico .env

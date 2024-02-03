@@ -10,7 +10,7 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js');
 const commands = [
     {
         name: 'hey',
-        description: 'Replies with hey!',
+        description: 'Responde com um hey!',
     },
     {
         name: 'ping',
@@ -46,6 +46,11 @@ const commands = [
                 required: true,
             },
         ]
+    },
+    {
+        // Criando um enbed
+        name: 'embed',
+        description: 'Enviando um embed'
     },
 ];
 
