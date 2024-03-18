@@ -18,7 +18,7 @@ client.on('ready', (c) => {
 });
 
 // esse event listener/command listener que escuta as interacoes, ele que é acionado quando um slash command é executado
-client.on('interactionCreate', (interaction) => {
+client.on('interactionCreate', async (interaction) => {
     // testa se a interacao nao (!) foi slash command. Se for um slash command (True), ele nega o resultado, tornando um False. Assim o resto do comando é executado.
     if (!interaction.isChatInputCommand()) return;
 
@@ -57,6 +57,28 @@ client.on('interactionCreate', (interaction) => {
 
             interaction.reply({embeds: [embed]});
     };
+    try {
+        if (interaction.isButton()){
+            await interaction.deferReply({ephemeral: true});
+            const role = interaction.guild.roles.cache.get(interaction.customId);
+            if (!role) {
+                interaction.editReply({
+                    content: 'Não encontro esse cargo',
+                })
+                return;
+            }
+            const hasRole = interaction.member.roles.cache.has(role.id);
+            if (hasRole){
+                await interaction.member.roles.remove(role);
+                await interaction.editReply(`O cargo ${role} foi removido`);
+                return;
+            }
+            await interaction.member.roles.add(role);
+            await interaction.editReply(`O cargo ${role} foi adicionado`);
+        };
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // event listener ativado quando uma nova mensagem é criada
