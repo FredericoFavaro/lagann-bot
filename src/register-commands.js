@@ -48,7 +48,7 @@ const commands = [
         ]
     },
     {
-        // Criando um enbed
+        // Criando um embed
         name: 'embed',
         description: 'Enviando um embed'
     },

@@ -20,7 +20,7 @@ client.on('ready', (c) => {
 // esse event listener/command listener que escuta as interacoes, ele que é acionado quando um slash command é executado
 client.on('interactionCreate', async (interaction) => {
     // testa se a interacao nao (!) foi slash command. Se for um slash command (True), ele nega o resultado, tornando um False. Assim o resto do comando é executado.
-    if (!interaction.isChatInputCommand()) return;
+    //if (!interaction.isChatInputCommand()) return;
 
     if (interaction.commandName === 'hey') {
         interaction.reply('hey!!');
@@ -35,7 +35,7 @@ client.on('interactionCreate', async (interaction) => {
         
         interaction.reply(`O resultado da soma é ${num1 + num2}`);
     };
-
+    // gera um embed simulando um "bem vindo" com botoes
     if (interaction.commandName === 'embed') {
         const embed = new EmbedBuilder()
             .setTitle('Teste Embed')
@@ -64,7 +64,7 @@ client.on('interactionCreate', async (interaction) => {
             if (!role) {
                 interaction.editReply({
                     content: 'Não encontro esse cargo',
-                })
+                });
                 return;
             }
             const hasRole = interaction.member.roles.cache.has(role.id);
