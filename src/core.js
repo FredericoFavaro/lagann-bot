@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 require('dotenv').config();
-const { Client, IntentsBitField, EmbedBuilder } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder, ActivityType } = require('discord.js');
 // Crieando um novo bot
 const client = new Client({
     // Dando permicoes ao bot, acesso ao servidor, membros, escutar msgs e ler o conteudo das mensagens respectivamente.
@@ -11,10 +11,35 @@ const client = new Client({
         IntentsBitField.Flags.MessageContent,
     ],
 });
+
+let status = [
+    {
+        name: 'Não veja esse vídeo',
+        type: ActivityType.Streaming,
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    },
+    {
+        name: 'Eu, robo',
+        type: ActivityType.Watching,
+    },
+    {
+        name: 'Styx - Mr. Roboto',
+        type: ActivityType.Listening,
+    },
+    {
+        name: 'MechCommander',
+        type: ActivityType.Playing,
+    },
+];
 // Criando um event listener. O "on" e um metodo com varios eventos, no caso "ready", que realiza uma acao quando o bot esta pronto
 // c referencia para client
 client.on('ready', (c) => {
 	console.log(`Rejeite o bom senso para tornar o impossível possível!\n${c.user.username} chegou com tudo!!!`);
+
+    setInterval(() => {
+        let random = Math.floor(Math.random() * status.length);
+        client.user.setActivity(status[random]);
+    }, 300000);
 });
 
 // esse event listener/command listener que escuta as interacoes, ele que é acionado quando um slash command é executado
